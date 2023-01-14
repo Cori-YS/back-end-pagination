@@ -3,6 +3,9 @@ import cors from 'cors';
 import express from 'express';
 
 import './config/environment';
+import { AppDataSource } from './shared/infra/typeorm';
+
+AppDataSource.initialize();
 
 const app = express();
 
