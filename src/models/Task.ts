@@ -2,12 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
+  UpdateDateColumn,
 } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
-@Entity()
+@Entity('tasks')
 export class Task {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: string;
 
   @Column()
@@ -20,5 +22,15 @@ export class Task {
   done: boolean;
 
   @CreateDateColumn()
-  createdAt: string;
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date | null;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuidv4();
+      this.updatedAt = new Date();
+    }
+  }
 }

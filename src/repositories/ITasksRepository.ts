@@ -1,0 +1,31 @@
+import { Task } from '~/models/Task';
+
+export interface ICreateTaskDTO {
+  id?: string;
+  title: string;
+  description?: string;
+  done?: boolean;
+}
+
+export interface IGetTasksDTO {
+  tasks: Task[];
+  total: number;
+}
+
+export interface ITasksRepository {
+  create(data: ICreateTaskDTO): Promise<Task>;
+
+  getOneById(id: string): Promise<Task | null>;
+
+  getOneByTitle(title: string): Promise<Task | null>;
+
+  getAll({
+    page_limit,
+    jump,
+  }: {
+    page_limit: number;
+    jump: number;
+  }): Promise<IGetTasksDTO>;
+
+  deleteOne(id: string): Promise<void>;
+}
