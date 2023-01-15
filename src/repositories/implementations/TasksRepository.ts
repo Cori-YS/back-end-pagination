@@ -50,7 +50,7 @@ export class TasksRepository implements ITasksRepository {
     return { tasks, total };
   }
 
-  async deleteOne(id: string): Promise<void> {
-    this.repository.delete({ id });
+  async deleteOne(task: Task): Promise<void> {
+    this.repository.remove(task);
   }
 }

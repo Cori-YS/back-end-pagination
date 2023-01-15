@@ -27,5 +27,5 @@ export interface ITasksRepository {
     jump: number;
   }): Promise<IGetTasksDTO>;
 
-  deleteOne(id: string): Promise<void>;
+  deleteOne(task: Task): Promise<void>;
 }
