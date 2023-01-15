@@ -34,7 +34,7 @@ export class TasksRepository implements ITasksRepository {
     return this.repository.findOneBy({ title });
   }
 
-  async getAll({
+  async getTasks({
     page_limit,
     jump,
   }: {

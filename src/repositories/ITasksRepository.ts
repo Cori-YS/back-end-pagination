@@ -19,7 +19,7 @@ export interface ITasksRepository {
 
   getOneByTitle(title: string): Promise<Task | null>;
 
-  getAll({
+  getTasks({
     page_limit,
     jump,
   }: {
