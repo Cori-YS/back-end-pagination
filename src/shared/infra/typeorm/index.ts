@@ -1,7 +1,11 @@
 import { DataSource } from 'typeorm';
-import { Task } from '~/models/Task';
+
+import { Task } from '../../../models/Task';
+import { CreateTasksTable1673802127327 } from './migrations/1673802127327-CreateTasksTable';
 
 const entities = [Task];
+
+const migrations = [CreateTasksTable1673802127327];
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -14,5 +18,5 @@ export const AppDataSource = new DataSource({
   logging: true,
   entities,
   subscribers: [],
-  migrations: [],
+  migrations,
 });
