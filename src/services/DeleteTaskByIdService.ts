@@ -8,7 +8,7 @@ class DeleteTaskByIdService {
     @inject('TasksRepository') private tasksRepository: ITasksRepository
   ) {}
 
-  async execute(id: string) {
+  async execute(id: string): Promise<void> {
     const task = await this.tasksRepository.getOneById(id);
 
     if (!task) {
