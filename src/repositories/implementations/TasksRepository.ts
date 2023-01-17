@@ -35,16 +35,16 @@ export class TasksRepository implements ITasksRepository {
   }
 
   async getTasks({
-    page_limit,
-    jump,
+    limit,
+    skip,
   }: {
-    page_limit: number;
-    jump: number;
+    limit: number;
+    skip: number;
   }): Promise<IGetTasksDTO> {
     const [tasks, total] = await this.repository
       .createQueryBuilder('tasks')
-      .take(page_limit)
-      .skip(jump)
+      .take(limit)
+      .skip(skip)
       .getManyAndCount();
 
     return { tasks, total };

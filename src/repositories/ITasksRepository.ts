@@ -10,6 +10,7 @@ export interface ICreateTaskDTO {
 export interface IGetTasksDTO {
   tasks: Task[];
   total: number;
+  pagesNumber?: number;
 }
 
 export interface ITasksRepository {
@@ -20,11 +21,11 @@ export interface ITasksRepository {
   getOneByTitle(title: string): Promise<Task | null>;
 
   getTasks({
-    page_limit,
-    jump,
+    limit,
+    skip,
   }: {
-    page_limit: number;
-    jump: number;
+    limit: number;
+    skip: number;
   }): Promise<IGetTasksDTO>;
 
   deleteOne(task: Task): Promise<void>;
