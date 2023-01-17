@@ -1,3 +1,4 @@
+import { Task } from '~/models/Task';
 import { ITasksRepository } from '~/repositories/ITasksRepository';
 import { AppError } from '~/shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
@@ -8,7 +9,7 @@ class MarkTaskAsDoneService {
     @inject('TasksRepository') private tasksRepository: ITasksRepository
   ) {}
 
-  async execute(id: string) {
+  async execute(id: string): Promise<Task> {
     const task = await this.tasksRepository.getOneById(id);
 
     if (!task) {
