@@ -69,9 +69,35 @@ describe('API Suite test', () => {
         useValue: tasksRepositoryMock,
       });
 
-      const response = await request(app).post('/tasks').send(CREATE_TASK);
+      const response = await request(app)
+        .post('/tasks')
+        .send(CREATE_TASK)
+        .expect(201);
 
-      console.log(response);
+      assert.deepStrictEqual(response.body, {
+        message: 'Task created with success',
+        data: mocks.task,
+      });
+
+      initializeDataSourceStub.restore();
+    });
+
+    it('should not be able to create a new task if the title is already in use', async () => {
+      const initializeDataSourceStub = sinon.stub(AppDataSource, 'initialize');
+
+      initializeDataSourceStub.resolves({} as DataSource);
+
+      container.register<ITasksRepository>('TasksRepository', {
+        useValue: tasksRepositoryMock,
+      });
+
+      const response = await request(app)
+        .post('/tasks')
+        .send(mocks.tasks[0])
+        .expect(400);
+
+      assert.deepStrictEqual(response.body.message, 'This title is invalid!');
+      initializeDataSourceStub.restore();
     });
   });
 });
